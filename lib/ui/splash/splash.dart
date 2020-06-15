@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:music/constants.dart';
+import 'package:music/ui/dashboard/dashboard.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (__) => DashBoardScreen()));
+    });
     return Container(
         child: Container(
             alignment: Alignment.center,

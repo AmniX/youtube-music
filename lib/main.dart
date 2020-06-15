@@ -13,6 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(systemNavigationBarColor: themeColorSwatch[700]));
+    imageCache.clear();
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
