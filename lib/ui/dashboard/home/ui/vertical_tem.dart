@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music/ui/dashboard/home/horizontal_item.dart';
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 class VerticalListHomeItem extends StatelessWidget {
   String _title;

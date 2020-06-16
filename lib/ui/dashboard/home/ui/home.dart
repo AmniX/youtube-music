@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:music/ui/dashboard/home/vertical_tem.dart';
+import 'file:///C:/Users/amant/StudioProjects/flutter_youtube_music/lib/ui/dashboard/home/ui/vertical_tem.dart';
 import 'package:dio/dio.dart';
 
 class HomeView extends StatelessWidget {

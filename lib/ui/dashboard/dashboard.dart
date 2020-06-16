@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:music/constants.dart';
-import 'package:music/ui/dashboard/home/home.dart';
-import 'file:///C:/Users/amant/StudioProjects/flutter_youtube_music/lib/ui/dashboard/hotlist/hotlist.dart';
-import 'file:///C:/Users/amant/StudioProjects/flutter_youtube_music/lib/ui/dashboard/library/library.dart';
+
+import 'home/ui/home.dart';
+import 'hotlist/hotlist.dart';
+import 'library/library.dart';
 
 class DashBoardScreen extends StatelessWidget {
   @override
