@@ -4,13 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:music/constants.dart';
 
 import 'package:flutter/services.dart';
+import 'package:music/data/models/youtube_search_response.dart';
+import 'package:music/ui/dashboard/player/player_bottom_sheet.dart';
+import 'package:music/utils/lazy.dart';
 import 'home/ui/home.dart';
 import 'hotlist/hotlist.dart';
 import 'library/library.dart';
 
 class DashBoardScreen extends StatelessWidget {
+  var bottomSheet = Lazy<PlayerBottomSheet>(() {
+    return PlayerBottomSheet();
+  });
+
+  void _showPlayerBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return bottomSheet.call();
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Function(Items) _playSong = (item) {
+      bottomSheet.call().onNewSongSelected(item);
+    };
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(systemNavigationBarColor: Colors.black));
     return MaterialApp(
@@ -95,7 +113,7 @@ class DashBoardScreen extends StatelessWidget {
                   ),
                   TabBarView(
                     children: [
-                      HomeView(),
+                      HomeView(_playSong),
                       HotListView(),
                       LibraryView(),
                     ],

@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:music/blocs/home/home_bloc.dart';
+import 'package:music/data/models/youtube_search_response.dart';
 import 'package:music/ui/dashboard/home/ui/vertical_tem.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatefulWidget {
+  final Function(Items) _playSong;
+
+  HomeView(this._playSong);
+
   @override
-  _HomeViewState createState() => _HomeViewState();
+  _HomeViewState createState() => _HomeViewState(_playSong);
 }
 
 class _HomeViewState extends State<HomeView>
     with AutomaticKeepAliveClientMixin<HomeView> {
   final _homeBloc = HomeBloc();
   final _emptyContainer = Container();
+  final Function(Items) _playSong;
+
+  _HomeViewState(this._playSong);
 
   @override
   void dispose() {
@@ -39,7 +47,7 @@ class _HomeViewState extends State<HomeView>
             itemCount: state.homePageResponses.length,
             itemBuilder: (BuildContext ctx, int pos) {
               final data = state.homePageResponses[pos];
-              return VerticalListHomeItem(data.first, data.second);
+              return VerticalListHomeItem(data.first, data.second, _playSong);
             },
           );
         }

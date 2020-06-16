@@ -4,10 +4,11 @@ import 'package:music/data/models/youtube_search_response.dart';
 import 'package:music/ui/dashboard/home/ui/horizontal_item.dart';
 
 class VerticalListHomeItem extends StatelessWidget {
-  String _title;
-  YoutubeSearchResponse _youtubeSearchResponse;
+  final String _title;
+  final YoutubeSearchResponse _youtubeSearchResponse;
+  final Function(Items) _playSong;
 
-  VerticalListHomeItem(this._title, this._youtubeSearchResponse);
+  VerticalListHomeItem(this._title, this._youtubeSearchResponse,this._playSong);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class VerticalListHomeItem extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext ctx, int pos) {
                 return HorizontalListHomeItem(
-                    _youtubeSearchResponse.items[pos]);
+                    _youtubeSearchResponse.items[pos],_playSong);
               }),
         ),
       )
