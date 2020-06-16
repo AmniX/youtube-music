@@ -20,7 +20,9 @@ class HorizontalListHomeItem extends StatelessWidget {
             borderOnForeground: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Image.network(
-              "https://picsum.photos/id/"+nextRandomInt(1, 500).toString()+"/200/300",
+              "https://picsum.photos/id/" +
+                  nextRandomInt(1, 500).toString() +
+                  "/200/300",
               fit: BoxFit.cover,
               width: home_image_size,
               height: home_image_size,
