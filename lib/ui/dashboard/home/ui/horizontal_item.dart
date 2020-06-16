@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:music/data/models/youtube_search_response.dart';
 import 'package:music/constants.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class HorizontalListHomeItem extends StatelessWidget {
-  final Items youtubeItem;
-  final Function(Items) _playSong;
+  final Video _video;
+  final Function(String) _playSong;
 
-  HorizontalListHomeItem(this.youtubeItem, this._playSong);
+  HorizontalListHomeItem(this._video, this._playSong);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _playSong(youtubeItem),
+      onTap: () => _playSong(_video.id.toString()),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -21,8 +21,7 @@ class HorizontalListHomeItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8)),
               borderOnForeground: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Image.network(
-                youtubeItem.snippet.thumbnails.medium.url,
+              child: Image.network(_video.thumbnails.mediumResUrl,
                 fit: BoxFit.cover,
                 width: home_image_size,
                 height: home_image_size,
@@ -35,7 +34,7 @@ class HorizontalListHomeItem extends StatelessWidget {
                 SizedBox(
                   width: home_image_size,
                   child: Text(
-                    youtubeItem.snippet.title,
+                    _video.title,
                     maxLines: 1,
                     style: TextStyle(
                         fontWeight: FontWeight.w500, color: textColorDark),
@@ -45,7 +44,8 @@ class HorizontalListHomeItem extends StatelessWidget {
                   width: home_image_size,
                   height: 40,
                   child: Text(
-                    youtubeItem.snippet.description,
+                    _video.description,
+                    maxLines: 3,
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,

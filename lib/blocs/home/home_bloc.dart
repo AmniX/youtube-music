@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:music/data/models/youtube_search_response.dart';
-import 'package:music/data/remote/youtube_api.dart';
-import 'package:music/keys.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:music/utils/pair.dart';
 
 part 'home_event.dart';
@@ -11,7 +9,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  YouTubeApi _youTubeApi = YouTubeApi(YOUTUBE_KEY);
+  var _youtubeExplode = YoutubeExplode();
 
   @override
   HomeState get initialState => HomeStateInitial();
@@ -20,13 +18,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is GetHomeData) {
       yield HomeStateLoading();
-      var result = List<Pair<String, YoutubeSearchResponse>>();
-      for (var query in event.queriesArray) {
-        var tmp = await _youTubeApi.search(query);
-        if (tmp.statusCode == 200 && tmp.data != null)
-          result.add(Pair(query, YoutubeSearchResponse.fromJson(tmp.data)));
+      try {
+        var result = List<Pair<String, List<Video>>>();
+        for (var query in event.queriesArray) {
+          result.add(Pair(query,
+              await _youtubeExplode.search.getVideosAsync(query).toList()));
+        }
+        yield HomeStateLoaded(result);
+      } catch (e, stackTrace) {
+        yield HomeStateError(e, stackTrace);
       }
-      yield HomeStateLoaded(result);
     }
+  }
+
+  @override
+  Future<void> close() {
+    _youtubeExplode.close();
+    return super.close();
   }
 }

@@ -7,8 +7,14 @@ class HomeStateInitial extends HomeState {}
 
 class HomeStateLoading extends HomeState {}
 
+class HomeStateError extends HomeState {
+  final Exception e;
+  final StackTrace stackTrace;
+  HomeStateError(this.e,this.stackTrace);
+}
+
 class HomeStateLoaded extends HomeState {
-  List<Pair<String, YoutubeSearchResponse>> homePageResponses;
+  List<Pair<String, List<Video>>> homePageResponses;
 
   HomeStateLoaded(this.homePageResponses);
 }

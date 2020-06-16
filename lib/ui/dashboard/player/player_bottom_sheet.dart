@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:music/data/models/youtube_search_response.dart';
 
 class PlayerBottomSheet extends StatefulWidget {
-
-  void onNewSongSelected(Items item){
+  void onNewSongSelected(String item) {
     print(item);
   }
 
@@ -14,6 +12,27 @@ class PlayerBottomSheet extends StatefulWidget {
 class _PlayerBottomSheetState extends State<PlayerBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.black);
+    return Container(
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.08,
+        maxChildSize: 0.88,
+        minChildSize: 0.08,
+        builder: (BuildContext context, ScrollController scrollController) {
+          return Material(
+            child: Container(
+              child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: 10,
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return ListTile(
+                      title: Text(index.toString()),
+                      leading: Icon(Icons.insert_chart),
+                    );
+                  }),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

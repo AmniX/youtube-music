@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:music/constants.dart';
-import 'package:music/data/models/youtube_search_response.dart';
 import 'package:music/ui/dashboard/home/ui/horizontal_item.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class VerticalListHomeItem extends StatelessWidget {
   final String _title;
-  final YoutubeSearchResponse _youtubeSearchResponse;
-  final Function(Items) _playSong;
+  final List<Video> videos;
+  final Function(String) _playSong;
 
-  VerticalListHomeItem(this._title, this._youtubeSearchResponse,this._playSong);
+  VerticalListHomeItem(this._title, this.videos, this._playSong);
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +24,11 @@ class VerticalListHomeItem extends StatelessWidget {
         child: SizedBox(
           height: home_image_size + home_image_size / 2,
           child: ListView.builder(
-              itemCount: _youtubeSearchResponse.items.length,
+              itemCount: videos.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext ctx, int pos) {
                 return HorizontalListHomeItem(
-                    _youtubeSearchResponse.items[pos],_playSong);
+                    videos[pos], _playSong);
               }),
         ),
       )

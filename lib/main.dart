@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: themeColorSwatch,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: themeColorSwatch,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          canvasColor: Colors.transparent),
       home: Material(
         child: SplashScreen(),
       ),

@@ -36,6 +36,7 @@ dev_dependencies:
   dio: 3.0.9
   dio_flutter_transformer: ^3.0.2
   flutter_bloc: 4.0.1
+  youtube_explode_dart: 1.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
