@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music/utils/utils.dart';
 
-import '../../../constants.dart';
+import 'package:music/constants.dart';
+
 
 class HorizontalListHomeItem extends StatelessWidget {
   String _title;
