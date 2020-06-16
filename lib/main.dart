@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
     imageCache.clear();
 
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: themeColorSwatch,
         visualDensity: VisualDensity.adaptivePlatformDensity,

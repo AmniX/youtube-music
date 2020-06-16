@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:music/utils/utils.dart';
-
+import 'package:music/data/models/youtube_search_response.dart';
 import 'package:music/constants.dart';
 
-
 class HorizontalListHomeItem extends StatelessWidget {
-  String _title;
+  Items youtubeItem;
 
-  HorizontalListHomeItem(this._title);
+  HorizontalListHomeItem(this.youtubeItem);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +19,7 @@ class HorizontalListHomeItem extends StatelessWidget {
             borderOnForeground: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Image.network(
-              "https://picsum.photos/id/" +
-                  nextRandomInt(1, 500).toString() +
-                  "/200/300",
+              youtubeItem.snippet.thumbnails.medium.url,
               fit: BoxFit.cover,
               width: home_image_size,
               height: home_image_size,
@@ -33,17 +29,25 @@ class HorizontalListHomeItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Title",
-                style: TextStyle(
-                    fontWeight: FontWeight.w500, color: textColorDark),
+              SizedBox(
+                width: home_image_size,
+                child: Text(
+                  youtubeItem.snippet.title,
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500, color: textColorDark),
+                ),
               ),
-              Text(
-                "Description",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: textColorDark),
+              SizedBox(
+                width: home_image_size,
+                height: 40,
+                child: Text(
+                  youtubeItem.snippet.description,
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: textColorDark),
+                ),
               )
             ],
           ),

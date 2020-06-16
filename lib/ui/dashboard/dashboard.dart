@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:music/constants.dart';
 
+import 'package:flutter/services.dart';
 import 'home/ui/home.dart';
 import 'hotlist/hotlist.dart';
 import 'library/library.dart';
@@ -10,6 +11,8 @@ import 'library/library.dart';
 class DashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(systemNavigationBarColor: Colors.black));
     return MaterialApp(
         home: DefaultTabController(
             length: 3,
