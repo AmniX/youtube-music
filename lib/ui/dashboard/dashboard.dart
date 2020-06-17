@@ -7,19 +7,25 @@ import 'package:music/ui/players/small_player.dart';
 import 'home/ui/home.dart';
 import 'hotlist/hotlist.dart';
 import 'library/library.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class DashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Function(String) _playSong = (item) {};
+
     final _smallPlayerHeight = MediaQuery.of(context).size.height * 0.1;
+    final _smallPlayer = SmallPlayer(_smallPlayerHeight, null);
+
+    final Function(Video) _playSong = (item) {
+        _smallPlayer.syncWithVideo(item);
+    };
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(systemNavigationBarColor: Colors.black));
     return MaterialApp(
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          bottomSheet: SmallPlayer(_smallPlayerHeight, null),
+          bottomSheet: _smallPlayer,
           appBar: AppBar(
             bottom: TabBar(
               labelColor: Colors.red,

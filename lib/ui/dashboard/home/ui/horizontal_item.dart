@@ -4,14 +4,14 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class HorizontalListHomeItem extends StatelessWidget {
   final Video _video;
-  final Function(String) _playSong;
+  final Function(Video) _playSong;
 
   HorizontalListHomeItem(this._video, this._playSong);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _playSong(_video.id.toString()),
+      onTap: () => _playSong(_video),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

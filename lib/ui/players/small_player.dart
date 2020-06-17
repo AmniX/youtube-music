@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 
 class SmallPlayer extends StatefulWidget {
   final double _height;
-  final Video _video;
+  Video _video;
 
   SmallPlayer(this._height, this._video);
 
   @override
   _SmallPlayerState createState() => _SmallPlayerState();
+
+  void syncWithVideo(Video newVideo) {
+    this._video = _video;
+  }
 }
 
 class _SmallPlayerState extends State<SmallPlayer> {
