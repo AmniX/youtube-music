@@ -14,7 +14,7 @@ class HomeStateError extends HomeState {
 }
 
 class HomeStateLoaded extends HomeState {
-  List<Pair<String, List<Video>>> homePageResponses;
+  final List<Pair<String, List<Video>>> homePageResponses;
 
   HomeStateLoaded(this.homePageResponses);
 }
