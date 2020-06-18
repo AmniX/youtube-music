@@ -3,7 +3,7 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart' as YTExplode;
 import 'package:music/constants.dart';
 
 class HotListItem extends StatelessWidget {
-  final Function(String) _playSong;
+  final Function(YTExplode.Video) _playSong;
   final YTExplode.Video _video;
 
   HotListItem(this._video, this._playSong);
@@ -11,7 +11,7 @@ class HotListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => _playSong(_video.id.toString()),
+        onTap: () => _playSong(_video),
         child: Padding(
           padding: EdgeInsets.only(left: 12, right: 12),
           child: SizedBox(

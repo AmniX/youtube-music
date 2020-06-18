@@ -4,9 +4,10 @@ import 'package:music/blocs/hotlist/hotlist_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music/constants.dart';
 import 'package:music/ui/dashboard/hotlist/hotlist_item.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart' as YTExplode;
 
 class HotListView extends StatefulWidget {
-  final Function(String) _playSong;
+  final Function(YTExplode.Video) _playSong;
 
   HotListView(this._playSong);
 
@@ -18,7 +19,7 @@ class _HotListViewState extends State<HotListView>
     with AutomaticKeepAliveClientMixin<HotListView> {
   final _hotListBloc = HotlistBloc();
 
-  final Function(String) _playSong;
+  final Function(YTExplode.Video) _playSong;
 
   _HotListViewState(this._playSong);
 
@@ -88,22 +89,24 @@ class _HotListViewState extends State<HotListView>
   }
 
   _buildHotlistView(videos) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 20, top: 32),
-            child: Text("TOP VIDEOS",
-                style: TextStyle(
-                    color: textColorDark, fontWeight: FontWeight.bold)),
-          ),
-          Expanded(
-              child: ListView.builder(
-                  itemCount: videos.length,
-                  itemBuilder: (context, position) {
-                    return HotListItem(videos[position], _playSong);
-                  }))
-        ]);
+    return Expanded(
+        child: ListView.builder(
+            itemCount: videos.length + 1,
+            itemBuilder: (context, position) {
+              if (position == 0) {
+                return _buildHeaderView();
+              } else {
+                return HotListItem(videos[position - 1], _playSong);
+              }
+            }));
+  }
+
+  _buildHeaderView() {
+    return Padding(
+      padding: EdgeInsets.only(left: 20, top: 32),
+      child: Text("TOP VIDEOS",
+          style: TextStyle(color: textColorDark, fontWeight: FontWeight.bold)),
+    );
   }
 
   @override
