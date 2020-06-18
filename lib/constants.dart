@@ -4,5 +4,3 @@ const ColorSwatch themeColorSwatch = Colors.red;
 const Color textColorDark = Colors.black87;
 
 const double home_image_size = 150;
-
-const double hotlist_icon_size = 50;

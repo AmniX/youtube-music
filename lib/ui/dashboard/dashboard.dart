@@ -107,7 +107,7 @@ class DashBoardScreen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     HomeView(_playSong),
-                    HotListView(_playSong),
+                    HotListView(),
                     LibraryView(),
                   ],
                 ),
