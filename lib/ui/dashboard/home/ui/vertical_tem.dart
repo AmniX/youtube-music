@@ -6,7 +6,7 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 class VerticalListHomeItem extends StatelessWidget {
   final String _title;
   final List<Video> videos;
-  final Function(String) _playSong;
+  final Function(Video) _playSong;
 
   VerticalListHomeItem(this._title, this.videos, this._playSong);
 

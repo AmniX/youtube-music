@@ -4,9 +4,10 @@ import 'package:music/blocs/home/home_bloc.dart';
 import 'package:music/constants.dart';
 import 'package:music/ui/dashboard/home/ui/vertical_tem.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart' hide Container;
 
 class HomeView extends StatefulWidget {
-  final Function(String) _playSong;
+  final Function(Video) _playSong;
 
   HomeView(this._playSong);
 
@@ -18,7 +19,7 @@ class _HomeViewState extends State<HomeView>
     with AutomaticKeepAliveClientMixin<HomeView> {
   final _homeBloc = HomeBloc();
   final _emptyContainer = Container();
-  final Function(String) _playSong;
+  final Function(Video) _playSong;
   final _homeQueries = ["New Songs", "2020 Hits", "Popular Songs"];
 
   _HomeViewState(this._playSong);
