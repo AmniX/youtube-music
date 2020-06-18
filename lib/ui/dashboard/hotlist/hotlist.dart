@@ -89,16 +89,15 @@ class _HotListViewState extends State<HotListView>
   }
 
   _buildHotlistView(videos) {
-    return Expanded(
-        child: ListView.builder(
-            itemCount: videos.length + 1,
-            itemBuilder: (context, position) {
-              if (position == 0) {
-                return _buildHeaderView();
-              } else {
-                return HotListItem(videos[position - 1], _playSong);
-              }
-            }));
+    return ListView.builder(
+        itemCount: videos.length + 1,
+        itemBuilder: (context, position) {
+          if (position == 0) {
+            return _buildHeaderView();
+          } else {
+            return HotListItem(videos[position - 1], _playSong);
+          }
+        });
   }
 
   _buildHeaderView() {
