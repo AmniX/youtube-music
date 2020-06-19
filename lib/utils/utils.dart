@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+class BenchMarkUtils {
+  var _currentMillis;
+
+  BenchMarkUtils() {
+    resetTime();
+  }
+
+  void dump(String prefix) {
+    print(prefix +
+        " Took: " +
+        (DateTime.now().millisecondsSinceEpoch - _currentMillis).toString() +
+        " Millis");
+    resetTime();
+  }
+
+  void resetTime() {
+    _currentMillis = DateTime.now().millisecondsSinceEpoch;
+  }
+}
+
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
@@ -14,4 +34,5 @@ class HexColor extends Color {
 }
 
 final _random = new Random();
+
 int nextRandomInt(int min, int max) => min + _random.nextInt(max - min);

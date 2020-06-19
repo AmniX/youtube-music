@@ -6,27 +6,36 @@ import 'package:music/blocs/audio_player/audio_player_bloc.dart';
 
 class SmallPlayer extends StatefulWidget {
   // ignore: close_sinks
-  final _audioPlayerBloc = AudioPlayerBloc();
-  final double _height;
-  Video _video;
 
-  SmallPlayer(this._height, this._video);
+  final double _height;
+  _SmallPlayerState _smallPlayerState;
+
+  SmallPlayer(this._height);
 
   @override
-  _SmallPlayerState createState() => _SmallPlayerState();
+  _SmallPlayerState createState(){
+    final result = _SmallPlayerState();
+    _smallPlayerState = result;
+    return result;
+  }
 
   void syncWithVideo(Video newVideo) {
-    _video = newVideo;
-    _audioPlayerBloc.add(PlayAudioEvent(newVideo));
+    _smallPlayerState.syncWithVideo(newVideo);
   }
 }
 
 class _SmallPlayerState extends State<SmallPlayer> {
+  final _audioPlayerBloc = AudioPlayerBloc();
   var _progress = 0.1;
+
+
+  void syncWithVideo(Video newVideo){
+    _audioPlayerBloc?.add(PlayAudioEvent(newVideo));
+  }
 
   @override
   void dispose() {
-    widget._audioPlayerBloc.close();
+    _audioPlayerBloc?.close();
     super.dispose();
   }
 
@@ -44,14 +53,14 @@ class _SmallPlayerState extends State<SmallPlayer> {
       ),
       height: widget._height,
       child: BlocBuilder(
-        bloc: widget._audioPlayerBloc,
+        bloc: _audioPlayerBloc,
         builder: (BuildContext ctx, AudioPlayerState state) {
           if (state is InitialAudioPlayerState) {
             return Container(
-              color: Colors.grey,
+              color: Colors.black,
             );
           } else if (state is LoadingAudioPlayerState) {
-            return CircularProgressIndicator();
+            return Container(child: CircularProgressIndicator());
           } else if (state is LoadedAudioPlayerState) {
             return Column(
               children: [
@@ -67,10 +76,8 @@ class _SmallPlayerState extends State<SmallPlayer> {
                     child: Row(
                       children: [
                         Card(
-                          child: Icon(
-                            Icons.personal_video,
-                            size: 42,
-                          ),
+
+                          child: Image.network(state.src.thumbnails.lowResUrl),
                         ),
                         Expanded(
                           child: Column(
@@ -81,7 +88,8 @@ class _SmallPlayerState extends State<SmallPlayer> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0, vertical: 2.0),
                                 child: Text(
-                                  "Flamingo",
+                                  state.src.title,
+                                  maxLines: 1,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -92,7 +100,8 @@ class _SmallPlayerState extends State<SmallPlayer> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0, vertical: 2.0),
                                 child: Text(
-                                  "Kero Kero Bonito",
+                                  state.src.description,
+                                  maxLines: 2,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,

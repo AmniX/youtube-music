@@ -14,7 +14,7 @@ class DashBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final _smallPlayerHeight = MediaQuery.of(context).size.height * 0.1;
-    final _smallPlayer = SmallPlayer(_smallPlayerHeight, null);
+    final _smallPlayer = SmallPlayer(_smallPlayerHeight);
 
     final Function(Video) _playSong = (item) {
         _smallPlayer.syncWithVideo(item);

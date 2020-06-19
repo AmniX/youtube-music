@@ -23,8 +23,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         for (var query in event.queriesArray) {
           result.add(Pair(query,
               await _youtubeExplode.search.getVideosAsync(query).toList()));
+          yield HomeStateLoaded(result);
         }
-        yield HomeStateLoaded(result);
       } catch (e, stackTrace) {
         yield HomeStateError(e, stackTrace);
       }
